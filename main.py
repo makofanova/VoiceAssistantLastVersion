@@ -19,14 +19,22 @@ def speech_writer():
 
 def keyword(x):
     sub = x.find("кеша")
-    if sub == 0:
-        x = x[(sub + 4) :]
-        print('Обрабатываю ', x)
-    else:
-        x = x[:(sub-1)] + x[(sub + 4):]
+    if sub == -1:
+        return None
+    elif sub == 0:
+        x = x[(sub + 4):]
         print('Обрабатываю ' + x)
-    return(x)
+        return x
+    else:
+        x = x.replace('кеша ', '')
+        x = x.replace(' кеша', '')
+        x = x.replace('кеша', '')
+        print('Обрабатываю ' + x)
+    return x
 
 while True:
     k = speech_writer()
-    keyword(k)
+    if keyword(k):
+        print('отправляем')
+    else:
+        print('слушаем дальше')
