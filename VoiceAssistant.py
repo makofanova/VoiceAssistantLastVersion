@@ -4,10 +4,10 @@ import json
 from RuzModule import RUZ
 from WeatherModule import Weather
 class VoiceAssistant:
-    def __init__(self):
+    def __init__(self, question):
         # self.model = build_model(configs.classifiers.paraphraser_rubert, download=True)
         self.flag = True
-        self.start()
+        self.quest = question
 
     def main_words(self, speech):
         tokenizer = nltk.tokenize.RegexpTokenizer('\w+|\$[\d\.]+|\S+')
@@ -20,11 +20,9 @@ class VoiceAssistant:
         return output
 
     def start(self):
-        while self.flag:
-            speech = self.speech_writer()
-            if speech != "":
-                ans = self.answer(speech)
-                self.voice_sintes(ans)
+        ans = self.answer(self.quest)
+        return ans
+
 
     def same(self, one, two):  # сократить 100
         k = self.model([one], [two])
